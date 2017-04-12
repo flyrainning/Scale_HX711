@@ -78,12 +78,12 @@ class Scale_HX711
     long get_value(int times = 1);
 
     //归零，自动设置OFFSET并保存
-		void tare(int times = 10);
-    void zero(int times = 10);
+		void tare(int times = 20);
+    void zero(int times = 20);
 
     //自动校准，weight 当前称上的重量（g），times 校准次数
     //校准过程：首先调用zero归零去皮重，称上放入砝码，调用adjust(砝码重量)
-    void adjust(long weight=1,int times=10);
+    void adjust(long weight=1,int times=50);
 
 		// 获取带单位的值 get_value() / SCALE
 		float get_units(int times = 1);

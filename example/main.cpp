@@ -30,12 +30,12 @@ Serial.print("get value: \t\t");
 Serial.println(scale.get_value(5));
 
 Serial.print("get units: \t\t");
-Serial.println(scale.get_units(5), 1);
+Serial.println(scale.get_units(5));
 
-scale.zero(); // reset the scale to 0
+scale.zero(); // 复位归零
 Serial.println("\nput 100g weight,wait 10s to adjust");
 delay(10000);
-scale.adjust(100); // this value is obtained by calibrating the scale with known weights; see the README for details
+scale.adjust(100);
 Serial.println("adjust finished:");
 Serial.print("offset:\t");
 Serial.println(scale.get_offset());
@@ -45,30 +45,30 @@ Serial.println(scale.get_scale());
 Serial.println("After setting up the scale:");
 
 Serial.print("read: \t\t");
-Serial.println(scale.read());                 // print a raw reading from the ADC
+Serial.println(scale.read());
 
 Serial.print("read average: \t\t");
-Serial.println(scale.read(20));       // print the average of 20 readings from the ADC
+Serial.println(scale.read(20));
 
 Serial.print("get value: \t\t");
-Serial.println(scale.get_value(5));		// print the average of 5 readings from the ADC minus the tare weight, set with tare()
+Serial.println(scale.get_value(5));
 
 Serial.print("get units: \t\t");
-Serial.println(scale.get_units(5), 1);        // print the average of 5 readings from the ADC minus tare weight, divided
-          // by the SCALE parameter set with set_scale
+Serial.println(scale.get_units(5));
+
 
 Serial.println("Readings:");
 }
 
 void loop() {
   Serial.print("one reading:\t");
-  Serial.print(scale.get_units(), 1);
+  Serial.print(scale.get_units());
   Serial.print("\traw:\t");
   Serial.print(scale.read());
   Serial.print("\t| average 10 times:\t");
-  Serial.println(scale.get_units(10), 1);
+  Serial.println(scale.get_units(10));
 
-  scale.power_down();			        // put the ADC in sleep mode
+  scale.power_down();
   delay(5000);
   scale.power_up();
 

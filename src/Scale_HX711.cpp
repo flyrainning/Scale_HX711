@@ -75,6 +75,7 @@ void Scale_HX711::begin() {
   	pinMode(sensor[i].DOUT, INPUT);
     digitalWrite(sensor[i].PD_SCK, LOW);
     read_one(i);
+
   }
 }
 bool Scale_HX711::is_ready(int index) {
@@ -83,7 +84,7 @@ bool Scale_HX711::is_ready(int index) {
 
 long Scale_HX711::read_one(int index) {
   //检测状态
-  if (sensor[index].Enable) return 0;
+  if (!sensor[index].Enable) return 0;
 	// wait for the chip to become ready
 	while (!is_ready(index)) {
 		// Will do nothing on Arduino but prevent resets of ESP8266 (Watchdog Issue)
@@ -194,5 +195,6 @@ void Scale_HX711::power_up() {
   for (size_t i = 0; i < sensor_count; i++) {
     digitalWrite(sensor[i].PD_SCK, LOW);
     sensor[i].Enable=true;
+    read_one_avg(i,5);
   }
 }
